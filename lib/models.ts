@@ -69,6 +69,11 @@ export function getModelClient(model: LLMModel, config: LLMModelConfig) {
         apiKey: apiKey || process.env.DEEPSEEK_API_KEY,
         baseURL: baseURL || 'https://api.deepseek.com/v1',
       })(modelNameString),
+    doubao: () =>
+      createOpenAI({
+        apiKey: apiKey || process.env.DOUBAO_API_KEY,
+        baseURL: baseURL || 'https://ark.cn-beijing.volces.com/api/v3',
+      })(modelNameString),
   }
 
   const createClient =

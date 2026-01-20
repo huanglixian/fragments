@@ -1,6 +1,20 @@
 {
   "models": [
     {
+      "id": "doubao-seed-code-preview-251028",
+      "provider": "Doubao",
+      "providerId": "doubao",
+      "name": "Doubao Seed Code Preview",
+      "multiModal": true
+    },
+    {
+      "id": "glm-4-7-251222",
+      "provider": "Doubao",
+      "providerId": "doubao",
+      "name": "GLM-4-7-251222",
+      "multiModal": false
+    },
+    {
       "id": "gpt-5",
       "provider": "OpenAI",
       "providerId": "openai",
