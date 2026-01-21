@@ -1,10 +1,11 @@
 export function getTemplateIdSuffix(id: string) {
   const isDev = process.env.NODE_ENV === 'development'
-  return isDev ? `${id}-dev` : id
+  const baseId = `gdy-${id}`
+  return isDev ? `${baseId}-dev` : baseId
 }
 
 export function getTemplateId(id: string) {
-  return id.replace(/-dev$/, '')
+  return id.replace(/^gdy-/, '').replace(/-dev$/, '')
 }
 
 const templates = {
