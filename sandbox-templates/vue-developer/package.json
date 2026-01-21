@@ -1,5 +1,5 @@
 {
-  "name": "vue-developer",
+  "name": "gdy-vue-developer",
   "version": "1.0.0",
   "scripts": {
     "build:dev": "tsx build.dev.ts",
