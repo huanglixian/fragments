@@ -1,7 +1,6 @@
 export function getTemplateIdSuffix(id: string) {
-  const isDev = process.env.NODE_ENV === 'development'
   const baseId = `gdy-${id}`
-  return isDev ? `${baseId}-dev` : baseId
+  return `${baseId}-dev`
 }
 
 export function getTemplateId(id: string) {
@@ -10,7 +9,7 @@ export function getTemplateId(id: string) {
 
 const templates = {
   'code-interpreter-v1': {
-    name: 'Python data analyst',
+    name: 'Python 数据分析',
     lib: [
       'python',
       'jupyter',
@@ -22,11 +21,11 @@ const templates = {
     ],
     file: 'script.py',
     instructions:
-      'Runs code as a Jupyter notebook cell. Strong data analysis angle. Can use complex visualisation to explain results.',
+      '以 Jupyter Notebook 单元方式运行代码，偏重数据分析，可用较复杂可视化来解释结果。',
     port: null,
   },
   [getTemplateIdSuffix('nextjs-developer')]: {
-    name: 'Next.js developer',
+    name: 'Next.js 开发',
     lib: [
       'nextjs@14.2.5',
       'typescript',
@@ -39,15 +38,15 @@ const templates = {
     ],
     file: 'pages/index.tsx',
     instructions:
-      'A Next.js 13+ app that reloads automatically. Using the pages router.',
+      '一个可自动热重载的 Next.js 13+ 应用，使用 pages 路由。',
     port: 3000,
   },
   [getTemplateIdSuffix('vue-developer')]: {
-    name: 'Vue前端原型',
+    name: 'Vue 前端原型',
     lib: ['vue@latest', 'nuxt@3.13.0', 'tailwindcss'],
     file: 'app/app.vue',
     instructions:
-      'A Vue.js 3+ app that reloads automatically. Only output a single file app/app.vue！！！ Do not use Nuxt, SSR, or multiple files.代码尽量简洁、精简，控制代码行数。',
+      '一个可自动热重载的 Vue.js 3+ 应用。只输出单文件 app/app.vue！！！不要使用 Nuxt、SSR 或多文件。代码尽量简洁、精简，控制代码行数。',
     port: 3000,
   },
   [getTemplateIdSuffix('streamlit-developer')]: {
@@ -62,11 +61,11 @@ const templates = {
       'plotly',
     ],
     file: 'app.py',
-    instructions: 'A streamlit app that reloads automatically.代码尽量简洁、精简，控制代码行数。',
+    instructions: '一个可自动热重载的 Streamlit 应用。代码尽量简洁、精简，控制代码行数。',
     port: 8501,
   },
   [getTemplateIdSuffix('gradio-developer')]: {
-    name: 'Gradio developer',
+    name: 'Gradio 开发',
     lib: [
       'gradio',
       'pandas',
@@ -78,7 +77,7 @@ const templates = {
     ],
     file: 'app.py',
     instructions:
-      'A gradio app. Gradio Blocks/Interface should be called demo.',
+      '一个 Gradio 应用，Gradio Blocks/Interface 命名为 demo。',
     port: 7860,
   },
 }
@@ -90,7 +89,7 @@ export function templatesToPrompt(templates: Templates) {
   return `${Object.entries(templates)
     .map(
       ([id, t], index) =>
-        `${index + 1}. ${id}: "${t.instructions}". File: ${t.file || 'none'}. Dependencies installed: ${t.lib.join(', ')}. Port: ${t.port || 'none'}.`,
+        `${index + 1}. ${id}: "${t.instructions}". 文件: ${t.file || '无'}. 已安装依赖: ${t.lib.join(', ')}. 端口: ${t.port || '无'}.`,
     )
     .join('\n')}`
 }

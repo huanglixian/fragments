@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.gitignore
+.env*
+*.log
+dist
+build
+coverage
+README.md
+readme-assets
+测试提示词.md
+*.md
+docker/通用示例（复制到具体项目中的docker文件夹）

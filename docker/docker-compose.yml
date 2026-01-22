@@ -1,0 +1,17 @@
+services:
+  fragments:
+    image: docker.cnb.cool/huanglixian/gdy-docker/fragments:latest
+    container_name: gdy-fragments
+    restart: unless-stopped
+    ports:
+      - "8411:3000"
+    env_file:
+      - ./.env.local
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+    volumes:
+      - fragments-data:/app/data
+
+volumes:
+  fragments-data:
