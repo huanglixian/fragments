@@ -14,7 +14,7 @@ import { LLMModelConfig } from '@/lib/models'
 import modelsList from '@/lib/models.json'
 import { FragmentSchema, fragmentSchema as schema } from '@/lib/schema'
 import { supabase } from '@/lib/supabase'
-import templates from '@/lib/templates'
+import templates, { getTemplateIdSuffix } from '@/lib/templates'
 import { ExecutionResult } from '@/lib/types'
 import { DeepPartial } from 'ai'
 import { experimental_useObject as useObject } from 'ai/react'
@@ -26,12 +26,12 @@ export default function Home() {
   const [chatInput, setChatInput] = useLocalStorage('chat', '')
   const [files, setFiles] = useState<File[]>([])
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
-    'auto',
+    getTemplateIdSuffix('streamlit-developer'),
   )
   const [languageModel, setLanguageModel] = useLocalStorage<LLMModelConfig>(
     'languageModel',
     {
-      model: 'doubao-seed-code-preview-251028',
+      model: 'GLM-4-7-251222',
     },
   )
 
@@ -52,7 +52,9 @@ export default function Home() {
     process.env.NEXT_PUBLIC_USE_MORPH_APPLY === 'true',
   )
 
+  const allowedModelIds = ['kimi-k2-250905', 'glm-4-7-251222']
   const filteredModels = modelsList.models.filter((model) => {
+    if (!allowedModelIds.includes(model.id)) return false
     if (process.env.NEXT_PUBLIC_HIDE_LOCAL_MODELS) {
       return model.providerId !== 'ollama'
     }
@@ -60,7 +62,7 @@ export default function Home() {
   })
 
   const defaultModel = filteredModels.find(
-    (model) => model.id === 'doubao-seed-code-preview-251028',
+    (model) => model.id === 'GLM-4-7-251222',
   ) || filteredModels[0]
 
   const currentModel = filteredModels.find(
@@ -73,10 +75,9 @@ export default function Home() {
       setLanguageModel({ ...languageModel, model: defaultModel.id })
     }
   }, [languageModel.model])
-  const currentTemplate =
-    selectedTemplate === 'auto'
-      ? templates
-      : { [selectedTemplate]: templates[selectedTemplate] }
+  const currentTemplate = {
+    [selectedTemplate]: templates[selectedTemplate],
+  }
   const lastMessage = messages[messages.length - 1]
 
   // Determine which API to use based on morph toggle and existing fragment

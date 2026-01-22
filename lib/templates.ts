@@ -43,15 +43,15 @@ const templates = {
     port: 3000,
   },
   [getTemplateIdSuffix('vue-developer')]: {
-    name: 'Vue.js developer',
+    name: 'Vue前端原型',
     lib: ['vue@latest', 'nuxt@3.13.0', 'tailwindcss'],
     file: 'app/app.vue',
     instructions:
-      'A Vue.js 3+ app that reloads automatically. Only when asked specifically for a Vue app.',
+      'A Vue.js 3+ app that reloads automatically. Only output a single file app/app.vue！！！ Do not use Nuxt, SSR, or multiple files.代码尽量简洁、精简，控制代码行数。',
     port: 3000,
   },
   [getTemplateIdSuffix('streamlit-developer')]: {
-    name: 'Streamlit developer',
+    name: 'Python 程序',
     lib: [
       'streamlit',
       'pandas',
@@ -62,7 +62,7 @@ const templates = {
       'plotly',
     ],
     file: 'app.py',
-    instructions: 'A streamlit app that reloads automatically.',
+    instructions: 'A streamlit app that reloads automatically.代码尽量简洁、精简，控制代码行数。',
     port: 8501,
   },
   [getTemplateIdSuffix('gradio-developer')]: {

@@ -1,11 +1,11 @@
 {
   "models": [
     {
-      "id": "doubao-seed-code-preview-251028",
+      "id": "kimi-k2-250905",
       "provider": "Doubao",
       "providerId": "doubao",
-      "name": "Doubao Seed Code Preview",
-      "multiModal": true
+      "name": "Kimi K2 250905",
+      "multiModal": false
     },
     {
       "id": "glm-4-7-251222",

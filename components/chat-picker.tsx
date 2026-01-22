@@ -42,32 +42,28 @@ export function ChatPicker({
           <SelectContent side="top">
             <SelectGroup>
               <SelectLabel>Persona</SelectLabel>
-              <SelectItem value="auto">
-                <div className="flex items-center space-x-2">
-                  <Sparkles
-                    className="flex text-muted-foreground"
-                    width={14}
-                    height={14}
-                  />
-                  <span>Auto</span>
-                </div>
-              </SelectItem>
-              {Object.entries(templates).map(([templateId, template]) => (
-                <SelectItem key={templateId} value={templateId}>
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      className="flex"
-                      src={`/thirdparty/templates/${getTemplateId(
-                        templateId,
-                      )}.svg`}
-                      alt={templateId}
-                      width={14}
-                      height={14}
-                    />
-                    <span>{template.name}</span>
-                  </div>
-                </SelectItem>
-              ))}
+              {Object.entries(templates)
+                .filter(([templateId]) =>
+                  ['streamlit-developer', 'vue-developer'].includes(
+                    getTemplateId(templateId),
+                  ),
+                )
+                .map(([templateId, template]) => (
+                  <SelectItem key={templateId} value={templateId}>
+                    <div className="flex items-center space-x-2">
+                      <Image
+                        className="flex"
+                        src={`/thirdparty/templates/${getTemplateId(
+                          templateId,
+                        )}.svg`}
+                        alt={templateId}
+                        width={14}
+                        height={14}
+                      />
+                      <span>{template.name}</span>
+                    </div>
+                  </SelectItem>
+                ))}
             </SelectGroup>
           </SelectContent>
         </Select>

@@ -84,6 +84,8 @@
 - 新增 provider 时，优先沿用 `createOpenAI({ apiKey, baseURL })` 的兼容接入方式。
 - 每个模型一般会涉及apikey，需要在 `.env.local` 和 `.env.template`增加相应的内容。
 - 可选：在 `public/thirdparty/logos` 增加提供商 logo。
+- 当前在 `components/chat-picker.tsx` 里做了模型过滤，只显示指定模型。
+- 如需还原全量模型：移除过滤逻辑（或改为不过滤），并确保 `lib/models.json` 中包含所需模型。
 
 ## 如何构建模板
 

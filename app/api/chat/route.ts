@@ -5,7 +5,7 @@ import { toPrompt } from '@/lib/prompt'
 import ratelimit from '@/lib/ratelimit'
 import { fragmentSchema as schema } from '@/lib/schema'
 import { Templates } from '@/lib/templates'
-import { streamObject, LanguageModel, CoreMessage } from 'ai'
+import { streamObject, generateText, LanguageModel, CoreMessage } from 'ai'
 
 export const maxDuration = 300
 
@@ -64,8 +64,38 @@ export async function POST(req: Request) {
       ...modelParams,
     })
 
+    if (model.id === 'doubao-seed-code-preview-251028') {
+      generateText({
+        model: modelClient as LanguageModel,
+        system: toPrompt(template),
+        messages,
+        maxRetries: 0,
+        ...modelParams,
+      })
+        .then((result) => {
+          console.log('doubao raw output', result.text.slice(0, 2000))
+        })
+        .catch((logError) => {
+          console.log('doubao raw output error', logError)
+        })
+    }
+
     return stream.toTextStreamResponse()
   } catch (error: any) {
+    if (model.id === 'doubao-seed-code-preview-251028') {
+      try {
+        const result = await generateText({
+          model: modelClient as LanguageModel,
+          system: toPrompt(template),
+          messages,
+          maxRetries: 0,
+          ...modelParams,
+        })
+        console.log('doubao raw output', result.text.slice(0, 2000))
+      } catch (logError) {
+        console.log('doubao raw output error', logError)
+      }
+    }
     return handleAPIError(error, { hasOwnApiKey: !!config.apiKey })
   }
 }
