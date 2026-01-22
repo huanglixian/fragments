@@ -46,7 +46,7 @@ const templates = {
     lib: ['vue@latest', 'nuxt@3.13.0', 'tailwindcss'],
     file: 'app/app.vue',
     instructions:
-      '一个可自动热重载的 Vue.js 3+ 应用。只输出单文件 app/app.vue！！！不要使用 Nuxt、SSR 或多文件。代码尽量简洁、精简，控制代码行数。',
+      '需要 Vue.js 3+ 构建应用，应用可自动热重载。只输出【单文件 app/app.vue】不要使用 Nuxt、SSR 或多文件。代码尽量合理、简洁，代码行数不宜过多。',
     port: 3000,
   },
   [getTemplateIdSuffix('streamlit-developer')]: {
@@ -61,7 +61,7 @@ const templates = {
       'plotly',
     ],
     file: 'app.py',
-    instructions: '一个可自动热重载的 Streamlit 应用。代码尽量简洁、精简，控制代码行数。',
+    instructions: '使用python的Streamlit框架构建应用。构建的时候，代码实用、精简。',
     port: 8501,
   },
   [getTemplateIdSuffix('gradio-developer')]: {

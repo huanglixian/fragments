@@ -3,9 +3,6 @@ import { PostHogProvider, ThemeProvider } from './providers'
 import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'GDY-AppBuilder',
@@ -20,7 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <PostHogProvider>
-        <body className={inter.className}>
+        <body
+          style={{
+            fontFamily:
+              '"PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Source Han Sans SC", "Heiti SC", sans-serif',
+          }}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="light"

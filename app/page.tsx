@@ -28,12 +28,6 @@ export default function Home() {
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
     getTemplateIdSuffix('streamlit-developer'),
   )
-  const [languageModel, setLanguageModel] = useLocalStorage<LLMModelConfig>(
-    'languageModel',
-    {
-      model: 'GLM-4-7-251222',
-    },
-  )
 
   const posthog = usePostHog()
 
@@ -64,6 +58,13 @@ export default function Home() {
   const defaultModel = filteredModels.find(
     (model) => model.id === 'GLM-4-7-251222',
   ) || filteredModels[0]
+
+  const [languageModel, setLanguageModel] = useLocalStorage<LLMModelConfig>(
+    'languageModel',
+    {
+      model: defaultModel?.id,
+    },
+  )
 
   const currentModel = filteredModels.find(
     (model) => model.id === languageModel.model,

@@ -15,11 +15,15 @@
 - `sandbox-templates/`：E2B 沙箱模板源码（按模板目录组织，如 `nextjs-developer`、`vue-developer`、`streamlit-developer`、`gradio-developer`）。
 - 其它配置：`middleware.ts`、`tailwind.config.ts`、`next.config.mjs`、`package.json`、`tsconfig.json` 等。
 
-## 前端关键入口
+## 项目文件说明
+
+### 前端关键入口
 
 - `app/layout.tsx`：全局布局与 HTML 框架。
 - `app/providers.tsx`：全局 Providers（主题、埋点、状态等）。
 - `app/page.tsx`：主界面与交互入口（聊天、预览、提交流程）。
+- `app/login/page.tsx`：登录页入口。
+- `app/login/actions.ts`：登录处理与 Cookie 写入。
 - `app/globals.css`：主题/设计 token（CSS 变量控制浅色/深色主题）。
 - `components/`：
   - `chat.tsx`：对话列表展示。
@@ -38,7 +42,7 @@
   - `auth-dialog.tsx`：登录/注册弹窗。
   - `components/ui/`：shadcn/ui 基础组件。
 
-## 后端与服务端入口
+### 后端与服务端入口
 
 - `app/api/chat/route.ts`：LLM 生成 fragment 的主入口（流式结构化输出）。
 - `app/api/morph-chat/route.ts`：Morph 模型的代码编辑/修补入口。
@@ -47,7 +51,7 @@
   - `publish.ts`：发布/分享相关 Server Action。
   - `validate-email.ts`：邮箱校验相关 Server Action。
 
-## 核心业务与配置（lib）
+### 核心业务与配置（lib）
 
 - `lib/models.json`：模型注册表（UI 下拉展示与默认模型来源）。
 - `lib/models.ts`：provider client 创建与路由（OpenAI 兼容、供应商配置）。
@@ -64,7 +68,7 @@
 - `lib/duration.ts`：时间/窗口相关辅助。
 - `lib/morph.ts`：Morph 编辑相关工具。
 
-## 根目录关键文件
+### 根目录关键文件
 
 - `README.md`：项目简介与使用说明。
 - `package.json`：依赖与脚本入口。
@@ -72,7 +76,7 @@
 - `tailwind.config.ts`：Tailwind 主题与扫描路径配置。
 - `postcss.config.mjs`：PostCSS 插件配置。
 - `tsconfig.json`：TypeScript 编译配置。
-- `middleware.ts`：中间件（请求前置处理）。
+- `middleware.ts`：中间件（请求前置处理，含登录访问拦截与短链跳转）。
 - `components.json`：shadcn/ui 配置。
 - `.env.template`：环境变量模板与说明。
 - `LICENSE`：开源许可信息。
@@ -99,3 +103,9 @@
   - `cd sandbox-templates/<template-name>`
   - `npm ci`
   - `npx tsx build.dev.ts`
+
+## 登录保护
+
+- 登录中间件在 `middleware.ts`。
+- 登录页与处理逻辑在 `app/login`。
+- 密码通过 `LOGIN_PASSWORD` 配置，未设置时默认 `1234`。
